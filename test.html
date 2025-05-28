@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Three Terminal Displays</title>
+  <title>Terminal Game with Counter</title>
   <style>
     body {
       background: #000;
@@ -14,14 +14,12 @@
       height: 100vh;
       margin: 0;
     }
-
     .input-panel {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       width: 200px;
     }
-
     .input {
       background: #000;
       color: #0f0;
@@ -31,13 +29,11 @@
       padding: 10px;
       margin-bottom: 10px;
     }
-
     .terminal-panel {
       display: flex;
       flex: 1;
       gap: 10px;
     }
-
     .terminal {
       background: #111;
       padding: 10px;
@@ -46,7 +42,6 @@
       flex-direction: column;
       border: 1px solid #0f0;
     }
-
     .output {
       flex: 1;
       overflow-y: auto;
@@ -64,31 +59,49 @@
 
   <!-- Right panel: Terminals -->
   <div class="terminal-panel">
-    <div class="terminal">
-      <div class="output" id="out1">WATCHING.</div>
-    </div>
-    <div class="terminal">
-      <div class="output" id="out2">PAINT.</div>
-    </div>
-    <div class="terminal">
-      <div class="output" id="out3">DRY.</div>
-    </div>
+    <div class="terminal"><div class="output" id="out1">[Terminal 1 Ready]\n</div></div>
+    <div class="terminal"><div class="output" id="out2">[Terminal 2 Ready]\n</div></div>
+    <div class="terminal"><div class="output" id="out3">[Terminal 3 Ready]\n</div></div>
   </div>
 
   <script>
+    let hiddenCounter = 0;
+    let messages = {};
+
+    // Load messages from JSON file
+    fetch('messages.json')
+      .then(response => response.json())
+      .then(data => {
+        messages = data;
+      });
+
     function setupTerminal(inputId, outputId) {
       const input = document.getElementById(inputId);
       const output = document.getElementById(outputId);
+      const output3 = document.getElementById('out3');
+
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           const cmd = input.value.trim();
           output.innerText += `\n> ${cmd}\n`;
           input.value = '';
+
+          // Increment hidden counter
+          hiddenCounter++;
+
+          // Show message in Terminal 3 if counter matches
+          if (messages[hiddenCounter]) {
+            output3.innerText += `\n[Event] ${messages[hiddenCounter]}\n`;
+            output3.scrollTop = output3.scrollHeight;
+          }
+
+          // Example command response
           if (cmd === 'hello') {
             output.innerText += 'Hello, world!\n';
           } else {
             output.innerText += '[Unknown command]\n';
           }
+
           output.scrollTop = output.scrollHeight;
         }
       });
@@ -96,7 +109,6 @@
 
     setupTerminal('in1', 'out1');
     setupTerminal('in2', 'out2');
-    // setupTerminal('in3', 'out3'); // Removed
   </script>
 </body>
 </html>
