@@ -15,7 +15,6 @@
       margin: 0;
     }
 
-    /* Left: input controls */
     .input-panel {
       display: flex;
       flex-direction: column;
@@ -33,7 +32,6 @@
       margin-bottom: 10px;
     }
 
-    /* Right: terminals */
     .terminal-panel {
       display: flex;
       flex: 1;
@@ -62,7 +60,6 @@
   <div class="input-panel">
     <input class="input" id="in1" placeholder="Command 1">
     <input class="input" id="in2" placeholder="Command 2">
-    <input class="input" id="in3" placeholder="Command 3">
   </div>
 
   <!-- Right panel: Terminals -->
@@ -99,7 +96,7 @@
 
     setupTerminal('in1', 'out1');
     setupTerminal('in2', 'out2');
-    setupTerminal('in3', 'out3');
+    // setupTerminal('in3', 'out3'); // Removed
   </script>
 </body>
 </html>
