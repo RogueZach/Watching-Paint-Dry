@@ -1,0 +1,51 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Text Game</title>
+    <style>
+      body {
+        background: black;
+        color: lime;
+        font-family: monospace;
+        padding: 10px;
+      }
+      #output {
+        white-space: pre-wrap;
+        min-height: 400px;
+      }
+      #input {
+        background: black;
+        color: lime;
+        border: none;
+        outline: none;
+        width: 100%;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="output">Welcome to the dungeon...\n</div>
+    <input id="input" autofocus />
+    <script>
+      const output = document.getElementById('output');
+      const input = document.getElementById('input');
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const cmd = input.value.trim();
+          output.innerText += '\n> ' + cmd + '\n';
+          input.value = '';
+          // Simple command logic
+          if (cmd === 'look') {
+            output.innerText += 'You see a torch and a door.\n';
+          } else {
+            output.innerText += "I don't understand that.\n";
+          }
+          // Auto-scroll
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+      });
+    </script>
+  </body>
+</html>
