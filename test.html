@@ -8,44 +8,74 @@
       color: #0f0;
       font-family: monospace;
       display: flex;
-      gap: 10px;
+      flex-direction: row;
+      gap: 20px;
       padding: 10px;
+      height: 100vh;
+      margin: 0;
     }
+
+    /* Left: input controls */
+    .input-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 200px;
+    }
+
+    .input {
+      background: #000;
+      color: #0f0;
+      border: 1px solid #0f0;
+      outline: none;
+      font-family: monospace;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Right: terminals */
+    .terminal-panel {
+      display: flex;
+      flex: 1;
+      gap: 10px;
+    }
+
     .terminal {
       background: #111;
       padding: 10px;
       flex: 1;
       display: flex;
       flex-direction: column;
+      border: 1px solid #0f0;
     }
+
     .output {
       flex: 1;
       overflow-y: auto;
       white-space: pre-wrap;
-      margin-bottom: 5px;
-    }
-    .input {
-      background: #000;
-      color: #0f0;
-      border: none;
-      outline: none;
-      font-family: monospace;
-      padding: 5px;
     }
   </style>
 </head>
 <body>
-  <div class="terminal">
-    <div class="output" id="out1">[Terminal 1 Ready]\n</div>
+
+  <!-- Left panel: Inputs -->
+  <div class="input-panel">
     <input class="input" id="in1" placeholder="Command 1">
-  </div>
-  <div class="terminal">
-    <div class="output" id="out2">[Terminal 2 Ready]\n</div>
     <input class="input" id="in2" placeholder="Command 2">
-  </div>
-  <div class="terminal">
-    <div class="output" id="out3">[Terminal 3 Ready]\n</div>
     <input class="input" id="in3" placeholder="Command 3">
+  </div>
+
+  <!-- Right panel: Terminals -->
+  <div class="terminal-panel">
+    <div class="terminal">
+      <div class="output" id="out1">[Terminal 1 Ready]\n</div>
+    </div>
+    <div class="terminal">
+      <div class="output" id="out2">[Terminal 2 Ready]\n</div>
+    </div>
+    <div class="terminal">
+      <div class="output" id="out3">[Terminal 3 Ready]\n</div>
+    </div>
   </div>
 
   <script>
