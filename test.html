@@ -1,51 +1,75 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Text Game</title>
-    <style>
-      body {
-        background: black;
-        color: lime;
-        font-family: monospace;
-        padding: 10px;
-      }
-      #output {
-        white-space: pre-wrap;
-        min-height: 400px;
-      }
-      #input {
-        background: black;
-        color: lime;
-        border: none;
-        outline: none;
-        width: 100%;
-        font-family: monospace;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="output">Welcome to the dungeon...\n</div>
-    <input id="input" autofocus />
-    <script>
-      const output = document.getElementById('output');
-      const input = document.getElementById('input');
+<head>
+  <title>Three Terminal Displays</title>
+  <style>
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: monospace;
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+    }
+    .terminal {
+      background: #111;
+      padding: 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .output {
+      flex: 1;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      margin-bottom: 5px;
+    }
+    .input {
+      background: #000;
+      color: #0f0;
+      border: none;
+      outline: none;
+      font-family: monospace;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="output" id="out1">[Terminal 1 Ready]\n</div>
+    <input class="input" id="in1" placeholder="Command 1">
+  </div>
+  <div class="terminal">
+    <div class="output" id="out2">[Terminal 2 Ready]\n</div>
+    <input class="input" id="in2" placeholder="Command 2">
+  </div>
+  <div class="terminal">
+    <div class="output" id="out3">[Terminal 3 Ready]\n</div>
+    <input class="input" id="in3" placeholder="Command 3">
+  </div>
 
+  <script>
+    function setupTerminal(inputId, outputId) {
+      const input = document.getElementById(inputId);
+      const output = document.getElementById(outputId);
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           const cmd = input.value.trim();
-          output.innerText += '\n> ' + cmd + '\n';
+          output.innerText += `\n> ${cmd}\n`;
           input.value = '';
-          // Simple command logic
-          if (cmd === 'look') {
-            output.innerText += 'You see a torch and a door.\n';
+          if (cmd === 'hello') {
+            output.innerText += 'Hello, world!\n';
           } else {
-            output.innerText += "I don't understand that.\n";
+            output.innerText += '[Unknown command]\n';
           }
-          // Auto-scroll
-          window.scrollTo(0, document.body.scrollHeight);
+          output.scrollTop = output.scrollHeight;
         }
       });
-    </script>
-  </body>
+    }
+
+    setupTerminal('in1', 'out1');
+    setupTerminal('in2', 'out2');
+    setupTerminal('in3', 'out3');
+  </script>
+</body>
 </html>
