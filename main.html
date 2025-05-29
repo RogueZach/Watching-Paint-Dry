@@ -69,7 +69,7 @@
     let messages = {};
 
     // Load messages from JSON file
-    fetch('messages.json')
+    fetch('generated.json')
       .then(response => response.json())
       .then(data => {
         messages = data;
